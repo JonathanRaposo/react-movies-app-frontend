@@ -1,13 +1,225 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;700&display=swap');
+
+body{
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding:0;
+  font-family: 'Poppins', sans-serif;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+nav{
+  width: 100%;
+  height: 100px;
+  background-color: #00B7FF;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  position: sticky;
+  top:0;
+  z-index: 999;
+  
+
+}
+nav ul {
+  list-style: none;
+  margin-right: 20px;
+}
+nav ul li {
+  display: inline-block;
+  font-weight: 500;
+  text-align: center;
+  padding: 10px;
+  border-radius: 10px;
+  margin-left: 10px;
+  transition: box-shadow .15s;
+  
+}
+nav ul li:hover{
+  box-shadow: 3px 3px 5px 5px #08739d;
+}
+nav ul li a{
+  text-decoration: none;
+  color: #fff;
+}
+
+/* HomePage styles */
+.HomePage h1 {
+  text-align: center;
+}
+.HomePage h2 {
+  text-align: center;
+  color: red;
+}
+.HomePage .SearchBar {
+  width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+.HomePage .SearchBar input {
+  width: 400px;
+  margin-left: 20px;
+  padding: 4px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  font-size: 1em;
+  font-family: 'Poppins', sans-serif;
+  outline: none;
+}
+.HomePage .SearchBar .search-btn{
+  margin-left: 10px;
+  min-width: 85px;
+  padding: 4px 8px;
+  border: none;
+  border-radius: 10px; 
+  font-size: 1em;
+  font-family: 'Poppins', sans-serif;
+  transition: backgrond-color .15s;
+}
+.HomePage .SearchBar .search-btn:hover{
+background-color: #00B7FF;
+color: #fff;
+}
+
+
+.movieList-container {
+  width: 1000px;
+  margin: 20px auto;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+.HomePage h2 {
+color: red;
+  
+}
+.movieList-container .Card img{
+  width: 200px;
+  border-radius: 10px;
+}
+.movieList-container .Card{
+  margin-top: 40px;
+  text-align: center;
+}
+.movieList-container .details-link{
+  text-decoration: none;
+  padding: 8px;
+  border-radius: 10px;
+  color:#00B7FF;
+  margin-bottom: 20px;
+  transition: background-color .15s;
+}
+.movieList-container .details-link:hover{
+  background-color: #00B7FF;
+  color: #fff;
+}
+
+.error {
+  color: red;
+  text-align: center;
+}
+
+/* movieDetails style */
+.MovieCard > .content-wrapper {
+  width: 1000px;
+  margin: 50px auto;
+  display: flex;
+  align-items: center;
+}
+.MovieCard>.content-wrapper> img {
+  width: 400px;
+  border-radius: 10px;
+}
+.MovieCard> .content-wrapper> div {
+  padding-left: 20px;
+  width: 700px;
+}
+.MovieCard> .content-wrapper> div> .back-link{
+  text-decoration: none;
+  color: coral;
+  transition: text-decoration .15;
+}
+.MovieCard> .content-wrapper> div> .back-link:hover{
+  text-decoration: underline;
+}
+.MovieCard> .content-wrapper> div ul {
+  padding-left: 15px
+}
+.MovieCard> .content-wrapper> div p{
+  text-align: justify;
+}
+
+.MovieCard> .content-wrapper> div .update-link,
+.MovieCard> .content-wrapper> div .delete-btn{
+  text-decoration: none;
+  color: coral;
+  background-color: #fff;
+  border: none;
+  font-size: 1em;
+  font-family: 'Poppins', sans-serif;
+  transition: text-decoration .15s;
+}
+.MovieCard> .content-wrapper> div .update-link:hover{
+  text-decoration: underline;
+}
+.MovieCard> .content-wrapper> div .delete-btn:hover{
+  text-decoration: underline;
+}
+.MovieCard> .content-wrapper> h2 {
+  text-align: center;
+  color:#00B7FF;
+  font-size: 30px;
+  margin: 200px auto;
+}
+/* EditMoviePage style */
+.EditMoviePage h3,
+.AddNewMoviePage h3{
+  text-align: center;
+}
+.EditMoviePage form ,
+.AddNewMoviePage form {
+  width: 450px;
+  margin: 10px auto;
+  text-align: center;
+  padding: 10px;
+  box-shadow: 3px 3px 5px 5px grey;
+  border-radius: 10px;
+}
+.EditMoviePage form label,
+.AddNewMoviePage form label{
+  display: block;
+}
+.EditMoviePage form input,
+.EditMoviePage form textarea,
+.AddNewMoviePage form input,
+.AddNewMoviePage form textarea {
+  width: 300px;
+  padding: 6px;
+  font-size: 1em;
+  font-family: 'Poppins', sans-serif;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  outline: none;
+}
+.EditMoviePage form textarea ,
+.AddNewMoviePage form textarea{
+  height: 100px;
+}
+.EditMoviePage form button,
+.AddNewMoviePage form button{
+  display: block;
+  min-width: 80px;
+  margin: 20px auto;
+  padding: 8px 12px;
+  border: none;
+  border-radius: 20px;
+  background-color: #00B7FF;
+  color: #fff;
+  font-size: 1em;
+  font-family: 'Poppins', sans-serif;
+  transition: background-color .15s;
+}
+.EditMoviePage form button:hover{
+  background-color: #08739d;
+}
+.AddNewMoviePage form button:hover{
+  background-color: #08739d;
 }
