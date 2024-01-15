@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import noImageIcon from '../assets/images/no-image-1.png';
 
 const API_URL = 'http://localhost:5000';
 
@@ -8,8 +9,6 @@ const MovieCard = ({ movie }) => {
     const [message, setMessage] = useState(undefined);
 
     const navigate = useNavigate();
-
-
 
     const deleteMovie = () => {
 
@@ -32,7 +31,10 @@ const MovieCard = ({ movie }) => {
             {message && <h2>{message}</h2>}
             {oneMovie && (
                 <div className='content-wrapper'>
-                    <img src={oneMovie.image} alt="poster" />
+                    <img
+                        src={oneMovie.image ? oneMovie.image : noImageIcon}
+                        alt="poster"
+                    />
                     <div>
                         <Link to={`/`} className='back-link'>back</Link>
                         <h1>{oneMovie.title}</h1>

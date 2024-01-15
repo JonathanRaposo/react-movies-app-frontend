@@ -3,7 +3,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 
-const API_URL = 'http://localhost:5000';
+const API_URL = 'http://localhost:5000/api';
 
 const EditMoviePage = () => {
     const [title, setTitle] = useState('');
@@ -14,12 +14,11 @@ const EditMoviePage = () => {
     const [errorMessage, setErrorMessage] = useState(undefined);
 
     const { id } = useParams();
-    console.log('id: ', id)
     const navigate = useNavigate();
 
     useEffect(() => {
         axios
-            .get(`${API_URL}/api/movies/${id}`)
+            .get(`${API_URL}/movies/${id}`)
             .then((response) => {
                 const movie = response.data;
                 setTitle(movie.title);
@@ -29,7 +28,19 @@ const EditMoviePage = () => {
                 setImage(movie.image);
             })
             .catch((err) => console.log('Error while retrieving movie: ', err));
-    }, [id])
+    }, [id]);
+
+    const handleFileUpload = (e) => {
+
+        const uploadFile = new FormData();
+        uploadFile.append('imageUrl', e.target.files[0])
+        axios
+            .post(`${API_URL}/upload`, uploadFile)
+            .then((response) => {
+                setImage(response.data.fileUrl)
+            })
+            .catch((err) => console.log('Error uploading file: ', err))
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -37,9 +48,9 @@ const EditMoviePage = () => {
         const updatedMovie = { title, director, stars, description, image };
 
         axios
-            .put(`${API_URL}/api/movies/${id}`, updatedMovie)
+            .put(`${API_URL}/movies/${id}`, updatedMovie)
             .then((response) => {
-                console.log('updated movie: ', response.data)
+                // console.log('updated movie: ', response.data)
                 navigate(`/movies/${id}`)
             })
             .catch((err) => {
@@ -85,13 +96,16 @@ const EditMoviePage = () => {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                 />
-                <label htmlFor='image'>Image</label>
-                <input
-                    type="text"
-                    id="image"
-                    value={image}
-                    onChange={(e) => setImage(e.target.value)}
-                />
+                <label htmlFor='image'>click here to upload image
+                    <input
+                        type="file"
+                        id="image"
+                        onChange={(e) => handleFileUpload(e)}
+                        hidden
+                    />
+
+                </label>
+
                 <button type="submit">Update</button>
                 {errorMessage && <p className='error'>{errorMessage}</p>}
             </form>

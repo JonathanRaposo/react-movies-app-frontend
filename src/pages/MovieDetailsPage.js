@@ -5,7 +5,7 @@ import axios from 'axios';
 import MovieCard from '../components/MovieCard';
 
 
-const API_URL = 'http://localhost:5000';
+const API_URL = 'http://localhost:5000/api';
 
 const MovieDetailsPage = () => {
     const [movie, setMovie] = useState(null);
@@ -16,7 +16,7 @@ const MovieDetailsPage = () => {
     const getMovie = async () => {
 
         try {
-            const response = await axios.get(`${API_URL}/api/movies/${id}`)
+            const response = await axios.get(`${API_URL}/movies/${id}`)
             setMovie(response.data)
         } catch (err) {
             console.log('Error while retrieving movie: ', err)

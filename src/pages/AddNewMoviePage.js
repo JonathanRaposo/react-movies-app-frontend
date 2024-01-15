@@ -1,8 +1,9 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 
-const API_URL = 'http://localhost:5000';
+const API_URL = 'http://localhost:5000/api';
 
 const AddNewMoviePage = () => {
     const [title, setTitle] = useState('');
@@ -14,11 +15,36 @@ const AddNewMoviePage = () => {
 
     const navigate = useNavigate();
 
+    const handleFileUpload = async (e) => {
+        console.log(e.target.files[0])
+        const uploadData = new FormData();
+        uploadData.append('imageUrl', e.target.files[0]);
+
+        try {
+            const response = await fetch(`${API_URL}/upload`, {
+                method: 'POST',
+                body: uploadData
+            })
+            const data = await response.json();
+            console.log('data', data)
+            if (data.message) {
+                let msg = data.message
+                setErrorMessage(msg)
+                return;
+            } else {
+                setImage(data.fileUrl)
+            }
+
+        } catch (err) {
+            console.log('Error uploading file: ', err);
+        }
+    }
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const requestBody = { title, director, stars, description, image };
 
-        fetch(`${API_URL}/api/movies`, {
+        fetch(`${API_URL}/movies`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(requestBody)
@@ -70,13 +96,10 @@ const AddNewMoviePage = () => {
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                 />
-                <label htmlFor='image'>Image</label>
-                <input
-                    type="text"
-                    id="image"
-                    value={image}
-                    onChange={(e) => setImage(e.target.value)}
-                />
+                <label>click here to upload image
+                    <input type="file" onChange={(e) => handleFileUpload(e)} hidden />
+                </label>
+
                 <button type="submit">Add</button>
                 {errorMessage && <p className='error'>{errorMessage}</p>}
             </form>

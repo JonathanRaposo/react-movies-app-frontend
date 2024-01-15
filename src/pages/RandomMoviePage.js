@@ -4,13 +4,13 @@ import { Link } from 'react-router-dom'
 import axios from 'axios';
 
 
-const API_URL = 'http://localhost:5000';
+const API_URL = 'http://localhost:5000/api';
 
 const RandomMoviePage = () => {
     const [movie, setMovie] = useState({});
     const getRandomMovie = async () => {
         try {
-            const response = await axios.get(`${API_URL}/api/movies/random`);
+            const response = await axios.get(`${API_URL}/movies/random`);
             setMovie(response.data)
         } catch (err) {
             console.log('Error while getting random movie: ', err)

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import SearchBar from '../components/SearchBar';
 
 
-const API_URL = 'http://localhost:5000';
+const API_URL = 'http://localhost:5000/api';
 
 const HomePage = () => {
     const [movies, setMovies] = useState([]);
@@ -13,7 +13,7 @@ const HomePage = () => {
 
     const getAllMovies = async () => {
         try {
-            const response = await fetch(`${API_URL}/api/movies`)
+            const response = await fetch(`${API_URL}/movies`)
             const data = await response.json();
             setMovies(data);
 
@@ -34,7 +34,7 @@ const HomePage = () => {
 
 
         try {
-            const response = await fetch(`${API_URL}/api/movies/search?q=${query}`)
+            const response = await fetch(`${API_URL}/movies/search?q=${query}`)
             const data = await response.json();
             // console.log('data: ', data)
             if (data.message) {

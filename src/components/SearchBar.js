@@ -6,7 +6,7 @@ const SearchBar = ({ handleQuery, handleSearch }) => {
             <input
                 type="text"
                 name="search"
-                placeholder='Search movie'
+                placeholder='Search movie by name or keyword'
                 onChange={handleQuery}
             />
             <button onClick={handleSearch} className='search-btn'>Search</button>
