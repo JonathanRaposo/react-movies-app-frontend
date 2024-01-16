@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+
+
 
 
 const API_URL = 'http://localhost:5000/api';
+
 
 const AddNewMoviePage = () => {
     const [title, setTitle] = useState('');
@@ -97,6 +99,7 @@ const AddNewMoviePage = () => {
                     onChange={(e) => setDescription(e.target.value)}
                 />
                 <label>click here to upload image
+
                     <input type="file" onChange={(e) => handleFileUpload(e)} hidden />
                 </label>
 
